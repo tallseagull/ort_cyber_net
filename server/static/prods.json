@@ -1,0 +1,26 @@
+[
+      {
+        "name" : "Meet and greet with Bill Murray",
+        "price" : "19.95",
+        "img" : "http://fillmurray.com/g/159/159",
+        "desc" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+      },
+      {
+        "name" : "Tap Water",
+        "price" : "0.99",
+        "img" : "http://shechive.files.wordpress.com/2011/08/odd-products-28.jpg?w=159&h=159",
+        "desc" : "You decide"
+      },
+      {
+        "name" : "Social Shower Curtain",
+        "price" : "40.00",
+        "img" : "http://media-cache-ec2.pinimg.com/550x/c7/02/8f/c7028f260ae030ba66494ee75407192f.jpg",
+        "desc" : "Always stay up-to-date with this very useless shower curtain!"
+      },
+      {
+        "name" : "Self stirring mug",
+        "img" : "https://i.dailymail.co.uk/i/pix/2012/09/16/article-2204256-15053801000005DC-304_634x524.jpg",
+        "price" : "12.35",
+        "desc" : "Don't get tired!"
+      }
+    ]

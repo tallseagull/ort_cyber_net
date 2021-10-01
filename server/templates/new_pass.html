@@ -1,0 +1,24 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='login_style.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js" type="text/javascript"></script>
+  <title>Reset Password</title>
+</head>
+
+<body>
+  <div class="main">
+    <p class="sign" align="center">Reset Password</p>
+    <form class="form1" id="reset-form">
+      <input class="pass" type="text" align="center" placeholder="New Password" id="pass1">
+      <input class="pass" type="text" align="center" placeholder="Repeat New Password" id="pass2">
+      <button class="submit" align="center">Submit</button>
+    </form>
+  </div>
+<script src="{{ url_for('static', filename='new_pass.js') }}" type="text/javascript"></script>
+</body>
+
+</html>

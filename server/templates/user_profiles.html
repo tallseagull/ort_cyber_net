@@ -1,0 +1,35 @@
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='user_profiles_style.css') }}">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://weloveiconfonts.com/api/?family=entypo">
+    <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/5175/utf-latest.min.css" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js" type="text/javascript"></script>
+    <title>User Details</title>
+</head>
+<body>
+    <div class="sidenav">
+      <a href="#" id="users-tab">User Details</a>
+      <a href="#" id="upload-tab">Upload File</a>
+      <a href="#" id="restart-tab">Restart Server</a>
+    </div>
+    <div class="main" id="users">
+        <h1>User Identity Details</h1>
+        <h2 class="sub-heading">For your eyes only!</h2>
+        <div class="table-wrapper" id='showData'></div>
+    </div>
+    <div class="main" id="restart" style="display: none;">
+        <h1>Restart the web server</h1>
+        <button id="restart-button" align="center">Restart</button>
+    </div>
+    <div class="main" id="upload" style="display: none;">
+        <h1>Upload here!</h1>
+        <form id="upload-form" enctype="multipart/form-data" action="{{base_path}}/upload_file" method="POST">
+            <input class="form-item" name="file_name" type="text" placeholder="File name" required>
+            <input class="form-item" name="payload" type="file" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+<script src="{{ url_for('static', filename='user_profiles.js') }}" type="text/javascript"></script>
+</body>
+</html>

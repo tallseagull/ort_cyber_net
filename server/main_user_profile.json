@@ -1,0 +1,51 @@
+[
+  {
+    "id": 2,
+    "address": "Ben-Gurion 10, Hadera",
+    "email": "david23@gmail.com",
+    "account": "10-650-107863",
+    "full_name": "David Bercovich"
+  },
+  {
+    "id": 3,
+    "address": "Moshe Dayan 25, Afula",
+    "email": "moshik_11@hotmail.com",
+    "account": "12-55-123974",
+    "full_name": "Moshe Cohen"
+  },
+  {
+    "id": 4,
+    "address": "Einstein 86, Haifa",
+    "email": "don_1982@company.com",
+    "account": "10-73-09842",
+    "full_name": "Donald W Kagan"
+  },
+  {
+    "id": 5,
+    "address": "Weizman 24, Jerusalem",
+    "email": "joe_the_plumber@gmail.com",
+    "account": "12-653-87231",
+    "full_name": "Joe Schumacher"
+  },
+  {
+    "id": 6,
+    "address": "Herzel 30, Tel-Aviv",
+    "email": "per.orit@gmail.com",
+    "account": "15-123-139453",
+    "full_name": "Orit Lavie"
+  },
+  {
+    "id": 7,
+    "address": "Azar 13, Holon",
+    "email": "akremmer@gmail.com",
+    "account": "10-323-472349",
+    "full_name": "Ayelet Kremmer"
+  },
+  {
+    "id": 8,
+    "address": "Hagalil 20, Rishon",
+    "email": "tzur.sa@walla.com",
+    "account": "11-334-97394/12",
+    "full_name": "Sarit Tzur-Ami"
+  }
+]
