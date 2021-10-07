@@ -4,7 +4,7 @@ import sys
 
 from .db_access import DBAccess
 from .validate_user import validate_user, _get_user_secret
-from flask import Flask, abort, render_template, request, redirect
+from flask import Flask, abort, render_template, request, redirect, jsonify
 import logging
 
 DB_FILE = 'server/ctf_db.db'
@@ -94,7 +94,7 @@ def forgot_passwd(user_id, token):
     :param token:
     :return:
     """
-    return render_template("forgot_passwd.html")
+    return render_template("forgot_passwd.html", base_path=f'/user/{user_id}/{token}')
 
 @app.route('/user/<user_id>/<token>/submit_new_passwd', methods=['POST'])
 def submit_new_passwd(user_id, token):
@@ -127,7 +127,7 @@ def products_page(user_id, token):
         abort(validation_res['status'])
 
     # User is valid. Render the template:
-    return render_template('products.html')
+    return render_template('products.html', base_path=f'/user/{user_id}/{token}')
 
 @app.route('/user/<user_id>/<token>/search', methods=['POST'])
 def search_product(user_id, token):
@@ -146,7 +146,7 @@ def search_product(user_id, token):
     search_str = request.form.get('q')
     products = db.get_products(search_str)
     # Respond with the JSON result:
-    return products
+    return jsonify({'prods': products})
 
 @app.route('/user/<user_id>/<token>/checkout', methods=['POST'])
 def checkout(user_id, token):
@@ -163,13 +163,16 @@ def checkout(user_id, token):
 
     # User is valid. Run the checkout:
     user_id = validation_res['user']['id']
-    selected_prod_ids = request.form.get('selected')
+    data = request.form.to_dict()
+    selected_prod_ids = request.form.getlist('selected[]')
+    print("Got selected_prod_ids:", selected_prod_ids)
     for prod_id in selected_prod_ids:
         db.add_purchase(prod_id, user_id)
+    return "Success!"
 
 @app.route('/user/<user_id>/<token>/thank_you', methods=['GET'])
 def thankyou(user_id, token):
-    return render_template("thank_you.html")
+    return render_template("thank_you.html", base_path=f'/user/{user_id}/{token}')
 
 ###################################################################################################
 # Admin endpoints
@@ -187,7 +190,7 @@ def view_users(user_id, token):
         # Return the error status code:
         abort(validation_res['status'])
 
-    return render_template("user_profiles.html")
+    return render_template("user_profiles.html", base_path=f'/admin/{user_id}/{token}')
 
 @app.route('/admin/<user_id>/<token>/view', methods=['POST'])
 def view_file(user_id, token):
@@ -207,10 +210,7 @@ def view_file(user_id, token):
     try:
         logging.info(f"Reading file from {file_path}...")
         with open(file_path, 'r') as fp:
-            if file_path.endswith('.json'):
-                res = json.load(fp)
-            else:
-                res = fp.read()
+            res = fp.read().encode('utf8')
         return res
     except Exception as e:
         # Failed - the path is not there
@@ -231,8 +231,21 @@ def upload_file(user_id, token):
         abort(validation_res['status'])
 
     # Upload the file:
+    print("Got upload request. Form is:")
+    print(request.form)
     file_path = request.form.get('file_name')
-    file_content = request.form.get('payload')
+    try:
+        # Try to get the data from the form directly:
+        file_content = request.form.get('payload')
+    except:
+        file_content = None
+        pass
+
+    if file_content is None:
+        # Get the data from the file upload parts:
+        print("Trying to get file...")
+        file_content = request.files.get('payload').read()
+
     if isinstance(file_content, str):
         mode = "w"
     else:

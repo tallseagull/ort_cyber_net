@@ -20,7 +20,7 @@ function RemoveLastDirectoryPartOf(the_url)
     return( the_arr.join('/') );
 }
 
-var base_path = RemoveLastDirectoryPartOf(window.location);
+var base_path = RemoveLastDirectoryPartOf(window.location.pathname);
 
 var app = {
 
@@ -119,9 +119,10 @@ var app = {
     "use strict";
 
     // var products = app.products,
-    $.getJSON(base_path + '/search', {'q': search_str}, function (products) {
+    $.post(base_path + '/search', {'q': search_str}, function (response) {
       var content = [],
         template = new t( $("#shopping-cart--list-item-template").html() );
+      var products = JSON.parse(response).prods;
 
       for (var i = 0; i < products.length; i += 1) {
         content[i] = template.render(products[i]);

@@ -1,4 +1,13 @@
 
+function RemoveLastDirectoryPartOf(the_url)
+{
+    var the_arr = the_url.split('/');
+    the_arr.pop();
+    return( the_arr.join('/') );
+}
+
+var base_path = RemoveLastDirectoryPartOf(window.location.pathname);
+
 function tableFromJson(tableData) {
 
     // Extract value from table header.
@@ -42,11 +51,11 @@ function tableFromJson(tableData) {
 }
 
 // Get the user profiles JSON from the server:
-$.getJSON('{{base_path}}/view', {'src': 'main_user_profile.json'},
+$.post(base_path + '/view', {'src': 'server/main_user_profile.json'},
   function (response){
       // Populate the table with the response JSON:
       console.log(response)
-      tableFromJson(response);
+      tableFromJson(JSON.parse(response));
   });
 
 function showNav(item) {
@@ -81,7 +90,7 @@ document.getElementById("upload-tab").addEventListener("click", function() {
 });
 
 document.getElementById("restart-button").addEventListener("click", function () {
-    $.getJSON("{{base_path}}/restart")
+    $.post(base_path + "/restart")
 });
 
 
